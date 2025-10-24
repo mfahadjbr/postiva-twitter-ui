@@ -1,3 +1,5 @@
+"use client";
+import AuthGuard from '@/lib/hooks/auth/AuthGuard'
 "use client"
 
 import { DashboardLayout } from "@/components/DashboardLayout"
@@ -81,6 +83,7 @@ export default function DashboardPage() {
   }
 
   return (
+    <AuthGuard>
     <DashboardLayout>
       <div className="space-y-6">
         {/* Welcome Section */}
@@ -202,5 +205,6 @@ export default function DashboardPage() {
         </Card>
       </div>
     </DashboardLayout>
+    </AuthGuard>
   )
 }

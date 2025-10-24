@@ -1,4 +1,5 @@
-"use client"
+"use client";
+import AuthGuard from '@/lib/hooks/auth/AuthGuard'
 
 import { DashboardLayout } from "@/components/DashboardLayout"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -15,7 +16,8 @@ import Link from "next/link"
 export default function UploadPage() {
   return (
     <DashboardLayout>
-      <div className="space-y-6">
+      <AuthGuard>
+        <div className="space-y-6">
         {/* Header */}
         <div className="relative overflow-hidden bg-linear-to-br from-black via-gray-900 to-black rounded-2xl p-8">
           <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
@@ -125,7 +127,8 @@ export default function UploadPage() {
             </CardContent>
           </Card>
         </div>
-      </div>
+        </div>
+      </AuthGuard>
     </DashboardLayout>
   )
 }

@@ -2,6 +2,7 @@
 
 import { useReducer, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { API_BASE_URL } from '@/lib/config/appConfig';
 import {
   generateSessionId,
   setSessionId,
@@ -21,7 +22,7 @@ const useGoogleAuth = () => {
   // Check Google OAuth configuration status
   const checkGoogleAuthStatus = useCallback(async () => {
     try {
-      const response = await fetch('https://backend.postsiva.com/auth/google/status', {
+  const response = await fetch(`${API_BASE_URL}/auth/google/status`, {
         method: 'GET',
         headers: {
           'accept': 'application/json',
@@ -56,7 +57,7 @@ const useGoogleAuth = () => {
       }
 
       // Redirect to Google OAuth login URL
-      const loginUrl = `https://backend.postsiva.com${status.login_url}`;
+  const loginUrl = `${API_BASE_URL}${status.login_url}`;
       
       // Store the current URL to redirect back after login
       const currentUrl = window.location.href;
@@ -85,7 +86,7 @@ const useGoogleAuth = () => {
         ...(state && { state }),
       });
 
-      const response = await fetch(`https://backend.postsiva.com/auth/google/callback?${params}`, {
+  const response = await fetch(`${API_BASE_URL}/auth/google/callback?${params}`, {
         method: 'GET',
         headers: {
           'accept': 'application/json',
@@ -154,7 +155,7 @@ const useGoogleAuth = () => {
         
         // Quietly fetch and cache Gemini API key (non-blocking, ignore errors)
         try {
-          const res = await fetch('https://backend.postsiva.com/gemini-keys/', {
+          const res = await fetch(`${API_BASE_URL}/gemini-keys/`, {
             method: 'GET',
             headers: {
               'accept': 'application/json',

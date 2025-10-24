@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { type AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios'
 import { API_BASE_URL, DEBUG_LOGS } from '@/lib/config/appConfig'
 
 // Create axios instance with base configuration
@@ -12,7 +12,7 @@ export const api = axios.create({
 
 // Add request interceptor (quiet)
 api.interceptors.request.use(
-  (config) => {
+  (config: InternalAxiosRequestConfig) => {
     if (DEBUG_LOGS) {
       console.log('🚀 API Request:', {
         method: config.method?.toUpperCase(),
@@ -23,7 +23,7 @@ api.interceptors.request.use(
     }
     return config
   },
-  (error) => {
+  (error: AxiosError) => {
     if (DEBUG_LOGS) console.error('❌ API Request Error:', error)
     return Promise.reject(error)
   }
@@ -31,7 +31,7 @@ api.interceptors.request.use(
 
 // Add response interceptor (quiet)
 api.interceptors.response.use(
-  (response) => {
+  (response: AxiosResponse) => {
     if (DEBUG_LOGS) {
       console.log('✅ API Response:', {
         status: response.status,
@@ -42,7 +42,7 @@ api.interceptors.response.use(
     }
     return response
   },
-  (error) => {
+  (error: AxiosError) => {
     if (DEBUG_LOGS) {
       console.error('❌ API Response Error:', {
         status: error.response?.status,

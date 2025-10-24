@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
 import { useToast } from "@/components/ui/use-toast"
 import { Key, Trash2, Save, AlertTriangle, Twitter } from "lucide-react"
+import AuthGuard from "@/lib/hooks/auth/AuthGuard"
 
 export default function SettingsPage() {
   const [geminiKey, setGeminiKey] = useState("")
@@ -78,7 +79,8 @@ export default function SettingsPage() {
 
   return (
     <DashboardLayout>
-      <div className="space-y-4 sm:space-y-6">
+      <AuthGuard>
+        <div className="space-y-4 sm:space-y-6">
         {/* Page Header */}
         <div className="flex items-center justify-between px-2 sm:px-0">
           <div>
@@ -239,8 +241,8 @@ export default function SettingsPage() {
             </AlertDialog>
           </CardContent>
         </Card>
-
-      </div>
+        </div>
+      </AuthGuard>
     </DashboardLayout>
   )
 }

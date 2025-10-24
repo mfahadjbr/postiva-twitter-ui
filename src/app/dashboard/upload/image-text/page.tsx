@@ -1,6 +1,7 @@
 "use client"
 
 import { DashboardLayout } from "@/components/DashboardLayout"
+import AuthGuard from "@/lib/hooks/auth/AuthGuard"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -40,7 +41,8 @@ export default function ImageTextPostPage() {
 
   return (
     <DashboardLayout>
-      <div className="space-y-6">
+      <AuthGuard>
+        <div className="space-y-6">
         {/* Header */}
         <div className="relative overflow-hidden bg-linear-to-br from-black via-gray-900 to-black rounded-2xl p-8">
           <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
@@ -217,7 +219,8 @@ export default function ImageTextPostPage() {
             </div>
           </CardContent>
         </Card>
-      </div>
+        </div>
+      </AuthGuard>
     </DashboardLayout>
   )
 }
