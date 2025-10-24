@@ -27,14 +27,22 @@ export default function LoginPage() {
     })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Twitter connection check
+  const { checkTwitterConnection } = require('@/lib/hooks/twitter/connection/useTwitterConnectionStatus')()
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
     // Check for test credentials
     if (formData.email === "test@gmail.com" && formData.password === "123123123") {
       setShowSuccessPopup(true)
-      setTimeout(() => {
-        router.push("/auth/connect")
+      setTimeout(async () => {
+        // Check Twitter connection before redirect
+        const connected = await checkTwitterConnection()
+        if (connected) {
+          router.push("/dashboard")
+        } else {
+          router.push("/auth/connect")
+        }
       }, 2000)
     } else {
       alert("Invalid credentials. Use test@gmail.com / 123123123")
