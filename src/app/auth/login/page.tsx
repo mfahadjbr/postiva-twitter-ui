@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useTwitterConnectionStatus } from '@/lib/hooks/twitter/connection/useTwitterConnectionStatus'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -28,7 +29,7 @@ export default function LoginPage() {
   }
 
   // Twitter connection check
-  const { checkTwitterConnection } = require('@/lib/hooks/twitter/connection/useTwitterConnectionStatus')()
+  const { checkTwitterConnection } = useTwitterConnectionStatus()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
